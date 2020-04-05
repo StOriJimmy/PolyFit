@@ -1,9 +1,9 @@
 # Polygonal surface reconstruction from point clouds
 
-![](polyfit.png)
+![](./images/polyfit.png)
 <p align="center">PolyFit reconstruction pipeline</p>
 
-PolyFit implements the hypothesis and selection based surface reconstruction method described in the following paper:
+PolyFit implements the hypothesis and selection based surface reconstruction method described in the following [paper](https://3d.bk.tudelft.nl/liangliang/publications/2017/polyfit/polyfit.html):
 ```
 Liangliang Nan and Peter Wonka. 
 PolyFit: Polygonal Surface Reconstruction from Point Clouds. 
@@ -24,12 +24,21 @@ You can also build PolyFit from the source code:
   - [CGAL](http://www.cgal.org/index.html) (v4.10, v4.11.1 have been tested)
    
 * Build PolyFit. 
-  - Use CMake to generate project files for your favorite IDEs
+  - There are many ways to build PolyFit. Choose one of the following (or whatever you are familiar with):
+    - Option 1: Use any IDE that can directly handle CMakeLists files to open the CMakeLists.txt in the root directory of PolyFit. Then you should have obtained a usable project and just build. I recommend using [CLion](https://www.jetbrains.com/clion/) or [QtCreator](https://www.qt.io/product).
+    - Option 2: Use CMake to generate project files for your IDE. Then load the project to your IDE and build.
+    - Option 3: Use CMake to generate Makefiles and then `make` (on Linux/macOS) or `nmake`(on Windows with Microsoft Visual Studio).
+  
+Don't have any experience with C/C++ programming? Have a look at [How to build PolyFit step by step](./How_to_build.md).
+
+**News**: Since Aug. 5, 2019, PolyFit is also available in [CGAL](https://www.cgal.org/). Find more [here](https://www.cgal.org/2019/08/05/Polygonal_surface_reconstruction/).
   
 ---
 
 ### Run PolyFit
 Super easy! This demo version provides a user interface with a few buttons (with numbered icons) and screen hints corresponding to these steps. Just click the buttons following the hints.
+
+<img src="./images/gui.png" align="center" width="600"/>
 
 ---
 
@@ -38,10 +47,9 @@ Some test data can be downloaded from the [project page](https://3d.bk.tudelft.n
 
 More infomation about the data (e.g., data format) are described [here](https://github.com/LiangliangNan/PolyFit/blob/master/ReadMe-data.md).
 
-#### Plane extraction
-Incorporating plane extraction adds an unnecessary dependency to more third-party libraries (e.g., [RANSAC](http://cg.cs.uni-bonn.de/en/publications/paper-details/schnabel-2007-efficient/)). Besides, it has some randomness (due to the nature of RANSAC) and the data quality can vary a lot (it should be fine if some regions of the planes are missing). So I isolated this part from this demo version and you're expected to provide the planar segments as input. 
+**Plane extraction**. Incorporating plane extraction adds an unnecessary dependency to more third-party libraries (e.g., [RANSAC](http://cg.cs.uni-bonn.de/en/publications/paper-details/schnabel-2007-efficient/)). Besides, it has some randomness (due to the nature of RANSAC) and the data quality can vary a lot (it should be fine if some regions of the planes are missing). So I isolated this part from this demo version and you're expected to provide the planar segments as input. 
 
-You can use my [Mapple](https://3d.bk.tudelft.nl/liangliang/software.html) to extract planes from point clouds. After you load the point cloud, go to the menu *Partition* -> *Extract Primitives*. To visualize the planes, change the renderer from 'Plain' to 'Group' in the Rendering panel (at the left side of Mapple). You can save the planes as bvg (**B**inary **V**ertex **G**roup) format. The ASCII format vg also works but slow.
+You can use my [Mapple](https://3d.bk.tudelft.nl/liangliang/software.html) to extract planes from point clouds. After you load the point cloud, go to the menu *Partition* -> *Extract Primitives*. To visualize the planes, change the renderer from 'Plain' to 'Group' in the Rendering panel (at the left side of Mapple). You can save the planes as bvg (**B**inary **V**ertex **G**roup) format. The ASCII format vg also works but slow. Please note, **PolyFit assumes that the model is closed and all necessary planes are provided**. 
 
 ---
 
